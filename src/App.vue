@@ -20,7 +20,8 @@ export default {
 		},
   methods:{
     onChange(e){
-      this.total = e;
+      var totalFalse = e.filter(a=>a.completed === false).length; 		
+      this.total = totalFalse;
     }
   }
 }

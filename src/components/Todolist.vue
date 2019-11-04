@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<ul v-for="(task, index) in tasksFilter" :key="index">
-					<li class="title" @click="myFilter(task)" :class="{'done': task.completed}">{{task.title}}</li>
+					<li class="title" @click="myFilter(task, index)" :class="{'done': task.completed}">{{task.title}}</li>
 					<button class="remove" @click="removeTask(index)"><i class="far fa-trash-alt"></i></button>
 				</ul>
 			</div>
@@ -19,6 +19,7 @@
 	
 </template>
 <script>
+import Vue from 'vue'
 	export default {
 		name: 'Todolist',
 		data() {
@@ -44,9 +45,10 @@
 			clearAll(){
 				this.tasksFilter = [];
 			},
-			myFilter(task){
+			myFilter(task, index){
 			task.completed = !task.completed;
 			this.isActive = !this.isActive;
+			Vue.set(this.tasksFilter, index, task);
            }
 		},
 		mounted() {
@@ -54,9 +56,9 @@
 			this.tasksFilter = this.tasks;
 		},
 		watch: {
-			tasks:function() {
+			tasksFilter:function() {
 					localStorage.setItem('tasks', JSON.stringify(this.tasks));
-					let count = this.tasks.length;
+					let count = this.tasks;
 					this.$emit('onChange', count);		
 			},
 			newTask: function(param){
