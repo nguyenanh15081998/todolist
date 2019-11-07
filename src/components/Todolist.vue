@@ -19,7 +19,7 @@
 	
 </template>
 <script>
-import Vue from 'vue'
+	import Vue from 'vue'
 	export default {
 		name: 'Todolist',
 		data() {
@@ -46,10 +46,10 @@ import Vue from 'vue'
 				this.tasksFilter = [];
 			},
 			myFilter(task, index){
-			task.completed = !task.completed;
-			this.isActive = !this.isActive;
-			Vue.set(this.tasksFilter, index, task);
-           }
+				task.completed = !task.completed;
+				this.isActive = !this.isActive;
+				Vue.set(this.tasksFilter, index, task);
+			}
 		},
 		mounted() {
 			if (localStorage.getItem('tasks')) this.tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -57,13 +57,13 @@ import Vue from 'vue'
 		},
 		watch: {
 			tasksFilter:function() {
-					localStorage.setItem('tasks', JSON.stringify(this.tasks));
-					let count = this.tasks;
-					this.$emit('onChange', count);		
+				localStorage.setItem('tasks', JSON.stringify(this.tasks));
+				let count = this.tasks;
+				this.$emit('onChange', count);		
 			},
 			newTask: function(param){
-					this.tasksFilter = this.tasks;
-					this.tasksFilter = this.tasks.filter(x=>x.title.includes(param)); 					
+				this.tasksFilter = this.tasks;
+				this.tasksFilter = this.tasks.filter(x=>x.title.includes(param)); 					
 			}
 
 		}
@@ -76,27 +76,45 @@ import Vue from 'vue'
 .todo-list ul{
 	display: flex;
 	justify-content: center;
+	padding: 0;
 }
 .remove{
 	background: none;
 	border: none;
 	outline: none;
-	margin-left: 30px;
 	opacity: 0;
 	transition: 0.5s;
 }
 .todo-list ul li{
 	cursor: pointer;
+	width: 100%;
+	color: #dc3545;
+	border:1px solid #dc3545;
+	list-style: none;
+	padding: 5px;
 }
-.todo-list ul:hover .remove{
-	opacity: 1;
-	margin-left: 0px;
-}
-.fa-trash-alt{
-	color: red;
-}
-.done{
-	text-decoration: line-through;
-}
+/*.todo-list ul li:hover{
+	background-color: #dc3545;
+	color: white;
+	transition: 0.5s;
+	}*/
+	.todo-list ul:hover .remove{
+		opacity: 1;
+		margin-left: 0px;
+	}
+	.fa-trash-alt{
+		color: red;
+	}
+	.done{
+		text-decoration: line-through;
+		background: #28a745;
+		color: white !important;
+		border: 1px solid #28a745 !important;
+	}
+	#image-icon{
+		width: 20px;
+		height: 25px;
+		margin:7px 10px 0 0;
+	}
 </style>
 
