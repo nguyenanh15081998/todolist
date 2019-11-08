@@ -44,6 +44,8 @@
 			},
 			clearAll(){
 				this.tasksFilter = [];
+				this.tasks = [];
+				localStorage.clear();
 			},
 			myFilter(task, index){
 				task.completed = !task.completed;
